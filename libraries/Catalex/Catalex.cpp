@@ -6,7 +6,7 @@ Catalex::Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx)
     m_rx = rx;
     m_tx = tx;
     m_playlist_length = playlist_length;
-    m_serial = SoftwareSerial(m_rx, m_tx);
+    m_serial = new SoftwareSerial(m_rx, m_tx, false);
     m_volume = default_volume;
     m_device = default_device;
     selectDevice(m_device);
@@ -15,15 +15,14 @@ Catalex::Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx)
 
 Catalex::~Catalex()
 {
-    delete m_serial;
 }
 
 bool Catalex::play(uint16_t index)
 {
-    if (index < 0 || index > m_playlist_length) {
+    if (index < 1 || index > m_playlist_length) {
         return false;
     }
-    sendCommand(Cmd::play_index, index);
+    sendCommand(Cmd::cmd_play_index, index);
     return true;
 }
 
@@ -41,7 +40,7 @@ bool Catalex::setVolume(uint16_t volume)
     } else {
         m_volume = volume;
     }
-    sendCommand(Cmd::set_volume, m_volume);
+    sendCommand(Cmd::cmd_set_volume, m_volume);
     return true;
 }
 
@@ -52,7 +51,7 @@ bool Catalex::selectDevice(uint16_t device)
         return false;
     }
     m_device = device;
-    sendCommand(Cmd::select_device, m_device);
+    sendCommand(Cmd::cmd_select_device, m_device);
     return true;
 }
 
@@ -74,7 +73,7 @@ void Catalex::sendCommand(const uint8_t command, uint16_t data)
     buf[4] = (uint8_t)(data >> 8);
     buf[5] = (uint8_t)(data);
     for (uint8_t i=0; i<8; i++) {
-        m_serial.write(buf[i]);
+        m_serial->write(buf[i]);
     }
 }
 
