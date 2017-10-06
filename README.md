@@ -1,2 +1,27 @@
 # Corpsewood-Haunted-Forest
+
 Arduino code for controlling props in a Halloween haunted forest display.
+
+[Wolfe City Productions, LLC.](http://wolfecityproductions.com/corpsewood-haunted-forest)
+
+The two main requirements for this project are:
+
+1) That a PIR sensor can trigger playback of an audio sample on an mp3 playback device.
+2) That a PIR sensor can trigger a mechnical relay to actuate a pneumatic device for a specified amount of time.
+
+## Hardware
+
+* Arduino Uno
+* [Catalex YX5300 .mp3 player board](https://www.amazon.com/dp/B01JCI23JG/ref=asc_df_B01JCI23JG5203321/)
+* [GEREE 4 relay module board](https://www.amazon.com/dp/B00PU1EUMI?psc=1)
+
+## Implementation
+
+1) On detection of a rising edge on a selected pin (PIR output) a command is sent via UART to the Catalex mp3 player board instructing it to play a randomly indexed audio clip.
+2) On detection of a rising edge on a selected pin (PIR output) a digital output pin is set high and maintained until after a set timeout.
+
+## Pin mapping:
+
+* Pin 3 [I]: Used as software serial RX for Catalex board.
+* Pin 4 [O]: Used as software serial TX for Catalex board.
+:
