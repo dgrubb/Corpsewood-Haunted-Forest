@@ -38,11 +38,15 @@ class Catalex
     }
 
         Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx);
+        Catalex();
         ~Catalex();
+        bool init(uint16_t playlist_length, uint8_t rx, uint8_t tx);
+        bool ready();
         bool play(uint16_t index);
         bool playRandom();
         bool setVolume(uint16_t volume);
     private:
+        bool m_isInited;
         uint8_t m_rx;
         uint8_t m_tx;
         uint16_t m_volume;

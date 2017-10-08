@@ -2,6 +2,16 @@
 
 Catalex::Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx)
 {
+    m_isInited = false;
+    init(uint16_t playlist_length, uint8_t rx, uint8_t tx);
+}
+
+Catalex::~Catalex()
+{
+}
+
+bool Catalex::init(uint16_t playlist_length, uint8_t rx, uint8_t tx)
+{
     randomSeed(analogRead(0));
     m_rx = rx;
     m_tx = tx;
@@ -11,10 +21,12 @@ Catalex::Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx)
     m_device = default_device;
     selectDevice(m_device);
     setVolume(m_volume);
+    m_isInited = true;
 }
 
-Catalex::~Catalex()
+bool Catalex::ready()
 {
+    return m_isInited;
 }
 
 bool Catalex::play(uint16_t index)
