@@ -33,8 +33,8 @@ Digital pass-through:
 * Pin A2 [I]: Drives pin 10 HIGH for set time after rising edge.
 * Pin A3 [I]: Drives pin 11 HIGH for set time after rising edge.
 
-* Pin 8 [O]: Goes HIGH for set time after rising edge on A0;
-* Pin 9 [O]: Goes HIGH for set time after rising edge on A1;
-* Pin 10 [O]: Goes HIGH for set time after rising edge on A2;
-* Pin 11 [O]: Goes HIGH for set time after rising edge on A3;
+* Pin 8 [O]: Goes HIGH for set time after rising edge on A0.
+* Pin 9 [O]: Goes HIGH for set time after rising edge on A1.
+* Pin 10 [O]: Goes HIGH for set time after rising edge on A2.
+* Pin 11 [O]: Goes HIGH for set time after rising edge on A3.
 
