@@ -22,6 +22,19 @@ The two main requirements for this project are:
 
 ## Pin mapping:
 
-* Pin 3 [I]: Used as software serial RX for Catalex board.
-* Pin 4 [O]: Used as software serial TX for Catalex board.
-:
+Catalex module:
+* Pin 2 [I]: Triggers an interrupt on rising edge which starts mp3 playback.
+* Pin 5 [I]: Software serial RX pin (Arduino-side), connected to Catalex module's TX pin.
+* Pin 6 [O]: Software serial TX pin (Arduino-side), connected to Catalex module's RX pin.
+
+Digital pass-through:
+* Pin A0 [I]: Drives pin 8 HIGH for set time after rising edge.
+* Pin A1 [I]: Drives pin 9 HIGH for set time after rising edge.
+* Pin A2 [I]: Drives pin 10 HIGH for set time after rising edge.
+* Pin A3 [I]: Drives pin 11 HIGH for set time after rising edge.
+
+* Pin 8 [O]: Goes HIGH for set time after rising edge on A0;
+* Pin 9 [O]: Goes HIGH for set time after rising edge on A1;
+* Pin 10 [O]: Goes HIGH for set time after rising edge on A2;
+* Pin 11 [O]: Goes HIGH for set time after rising edge on A3;
+
