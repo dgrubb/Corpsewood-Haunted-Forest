@@ -1,9 +1,13 @@
 #include "Catalex.h"
 
+Catalex::Catalex()
+{
+}
+
 Catalex::Catalex(uint16_t playlist_length, uint8_t rx, uint8_t tx)
 {
     m_isInited = false;
-    init(uint16_t playlist_length, uint8_t rx, uint8_t tx);
+    init(playlist_length, rx, tx);
 }
 
 Catalex::~Catalex()

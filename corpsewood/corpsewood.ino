@@ -1,4 +1,4 @@
-#include <Catalen.h>
+#include <Catalex.h>
 
 #define APP_NAME    "Corpsewood Haunt Forest"
 #define APP_VERSION "0.1"
@@ -10,13 +10,13 @@
 
 #define DELAY_TIME              100 // ms
 
-Catalex player();
+Catalex player;
 
 typedef struct {
-    int input,
-    int output,
-    int timeout, // in increments of 100ms. E.g., for 1 second, timeout = 10
-    int count,
+    uint8_t input;
+    uint8_t output;
+    uint8_t timeout; // in increments of 100ms. E.g., for 1 second, timeout = 10
+    uint8_t count;
 } pin_map_t;
 
 pin_map_t IO_MAP[] = {
@@ -25,7 +25,7 @@ pin_map_t IO_MAP[] = {
     { A2, 10, 10, 0},
     { A3, 11, 10, 0},
     {NULL, NULL, NULL}
-}
+};
 
 void setup()
 {
@@ -59,7 +59,7 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(CATALEX_INTERRUPT_PIN), playClip, RISING);
 
     // Fin.
-    Serial.println(String(APP_NAME + ", " + APP_VERSION + " initialised"));
+    Serial.println(String(APP_NAME) + ", " + APP_VERSION + " initialised");
 }
 
 void loop()
@@ -76,9 +76,10 @@ void readInputs()
         // If a timeout delay has been set then it doesn't matter what
         // state the relevant input pin is in, we can ignore it
         if (0 == IO_MAP[i].count) {
-            if (digitalRead(IO_MAP[i])) {
+            if (digitalRead(IO_MAP[i].input)) {
                 IO_MAP[i].count = IO_MAP[i].timeout;
-                digitalWrite(IO_MAP[i].output HIGH);
+                digitalWrite(IO_MAP[i].output, HIGH);
+                Serial.println(String("Setting HIGH, pin: ") + IO_MAP[i].output);
             }
         }
         i++;
