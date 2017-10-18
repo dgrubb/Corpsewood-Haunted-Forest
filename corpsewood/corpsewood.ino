@@ -5,7 +5,7 @@
 
 #define CATALEX_ARDUINO_RX      5
 #define CATALEX_ARDUINO_TX      6
-#define CATALEX_PLAYLIST_LEN    3
+#define CATALEX_PLAYLIST_LEN    5
 #define CATALEX_INTERRUPT_PIN   2
 
 #define DELAY_TIME              100 // ms
@@ -106,7 +106,8 @@ void playClip()
     noInterrupts();
     if (player.ready()) {
         Serial.println("Playing audio sample");
-        player.playRandom();
+        //player.playRandom();
+        player.play(1);
     } else {
         Serial.println("Error, Catalex player not ready");
     }

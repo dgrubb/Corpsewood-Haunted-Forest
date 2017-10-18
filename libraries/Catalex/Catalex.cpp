@@ -20,7 +20,11 @@ bool Catalex::init(uint16_t playlist_length, uint8_t rx, uint8_t tx)
     m_rx = rx;
     m_tx = tx;
     m_playlist_length = playlist_length;
+    pinMode(m_rx, INPUT);
+    pinMode(m_tx, OUTPUT);
     m_serial = new SoftwareSerial(m_rx, m_tx, false);
+    m_serial->begin(9600);
+    delay(500);
     m_volume = default_volume;
     m_device = default_device;
     selectDevice(m_device);
@@ -35,6 +39,8 @@ bool Catalex::ready()
 
 bool Catalex::play(uint16_t index)
 {
+    Serial.print("Playing: ");
+    Serial.println(index);
     if (index < 1 || index > m_playlist_length) {
         return false;
     }
@@ -44,7 +50,7 @@ bool Catalex::play(uint16_t index)
 
 bool Catalex::playRandom()
 {
-    return play((uint16_t)random(0, m_playlist_length));
+    return play((uint16_t)random(1, m_playlist_length));
 }
 
 bool Catalex::setVolume(uint16_t volume)
@@ -84,10 +90,10 @@ void Catalex::sendCommand(const uint8_t command, uint16_t data)
     // 0xXX, first data byte
     // 0xXX, second data byte
     // 0xEF, fixed command suffix
-    uint8_t buf[8] = {0x7E, 0xFF, 0x06, 0x00, 0x00, 0x00, 0xEF};
+    uint8_t buf[8] = {0x7E, 0xFF, 0x06, 0x00, 0x01, 0x00, 0x00, 0xEF};
     buf[3] = command;
-    buf[4] = (uint8_t)(data >> 8);
-    buf[5] = (uint8_t)(data);
+    buf[5] = (uint8_t)(data >> 8);
+    buf[6] = (uint8_t)(data);
     for (uint8_t i=0; i<8; i++) {
         m_serial->write(buf[i]);
     }

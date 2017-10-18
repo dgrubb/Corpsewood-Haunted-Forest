@@ -10,7 +10,7 @@ class Catalex
     public:
         const uint16_t max_volume = 0x0030; // 100%
         const uint16_t min_volume = 0x0000; // 0%
-        const uint16_t sd_card_device = 0x0002;
+        const uint16_t sd_card_device = 0x02;
         const uint16_t default_device = sd_card_device;
         const uint16_t default_volume = max_volume; // This goes all the way to 11
 
