@@ -3,11 +3,13 @@
 #define APP_NAME    "Corpsewood Haunt Forest"
 #define APP_VERSION "0.1"
 
-#define CATALEX_ARDUINO_RX      5
-#define CATALEX_ARDUINO_TX      6
-#define CATALEX_PLAYLIST_LEN    5
+// Pin mapping
+#define CATALEX_ARDUINO_PIN_RX  5
+#define CATALEX_ARDUINO_PIN_TX  6
 #define CATALEX_INTERRUPT_PIN   2
 
+// General information
+#define CATALEX_PLAYLIST_LEN    5
 #define DELAY_TIME              100 // ms
 
 Catalex player;
@@ -51,7 +53,7 @@ void setup()
     // power up and become responsive over UART, so give it half a second (a lifetime
     // in uC years!) to sort itself out
     delay(500); // ms
-    player.init(CATALEX_PLAYLIST_LEN, CATALEX_ARDUINO_RX, CATALEX_ARDUINO_TX);
+    player.init(CATALEX_PLAYLIST_LEN, CATALEX_ARDUINO_PIN_RX, CATALEX_ARDUINO_PIN_TX);
     while (!player.ready()) {
         // Wait for acknowledgement that hardware module is ready
     }
